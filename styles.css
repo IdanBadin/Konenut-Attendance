@@ -20,18 +20,19 @@ body {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 0px;
 }
 
 h3 {
     margin-top: 0;
     margin-bottom: 20px;
+    font-size: 22px;
 
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 16px;
     color: #B4B4B8;
     margin-top: 5px;
 }
