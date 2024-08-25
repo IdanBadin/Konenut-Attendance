@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Attendance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>עידכון נוכחות</h1>
+        <h3>(כיתת כוננות גן חיים)</h3>
+        <select style="font-size: 20px;" id="nameSelect">
+            <option value="" disabled selected>בחר שם</option>
+            <option value="עידן בדין">עידן בדין</option>
+            <option value="דודי טוביהו">דודי טוביהו</option>
+            <option value="מירון בדין">מירון בדין</option>
+        </select>
+
+        <div>
+          <h4>בחר שם מהרשימה ולאחר מכן לחצ/י על הכפתור הרצוי</h4>
+        </div>
+
+        <div class="button-container">
+            <button id="presentButton" class="attendance-btn green" style="font-size: 20px;">במושב <span id="presentCount">0</span></button>
+            <button id="absentButton" class="attendance-btn red" style="font-size: 20px;">לא במושב <span id="absentCount">0</span></button>
+        </div>
+
+        <button id="toListPage" class="nav-btn" style="font-size: 20px;">לרשימות</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
