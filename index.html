@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Attendance Tracker</title>
     <link rel="stylesheet" href="styles.css">
@@ -15,7 +15,7 @@
     <div class="container">
         <h1>עידכון נוכחות</h1>
         <h3>(כיתת כוננות גן חיים)</h3>
-        <select style="font-size: 20px;" id="nameSelect">
+        <select id="nameSelect">
             <option value="" disabled selected>בחר שם</option>
             <option value="עידן בדין">עידן בדין</option>
             <option value="דודי טוביהו">דודי טוביהו</option>
@@ -27,11 +27,11 @@
         </div>
 
         <div class="button-container">
-            <button id="presentButton" class="attendance-btn green" style="font-size: 20px;">במושב <span id="presentCount">0</span></button>
-            <button id="absentButton" class="attendance-btn red" style="font-size: 20px;">לא במושב <span id="absentCount">0</span></button>
+            <button id="presentButton" class="attendance-btn green">במושב <span id="presentCount">0</span></button>
+            <button id="absentButton" class="attendance-btn red">לא במושב <span id="absentCount">0</span></button>
         </div>
 
-        <button id="toListPage" class="nav-btn" style="font-size: 20px;">לרשימות</button>
+        <button id="toListPage" class="nav-btn">לרשימות</button>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
