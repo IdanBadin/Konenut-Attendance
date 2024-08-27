@@ -10,21 +10,21 @@ body {
     align-items: center;
     min-height: 100vh;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .container {
     width: 100%;
     max-width: 480px;
     padding: 30px;
-    padding-bottom: 100px; /* Extra padding for the fixed elements */
+    padding-bottom: 80px; /* Adjusted padding to create more space for the button */
+    margin: 0 15px; /* Added margin to create space on the left and right sides */
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
-    overflow-y: auto;
-    max-height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
@@ -96,7 +96,7 @@ select:focus {
 }
 
 .attendance-btn.red {
-    background-color: black;
+    background-color: #dc3545;
 }
 
 .attendance-btn:hover {
@@ -105,23 +105,28 @@ select:focus {
 }
 
 .nav-btn {
-    width: 90%; /* Reduced width for a more balanced look */
-    max-width: 400px; /* Added max-width to keep the button proportional */
+    width: 90%; /* Index page: matches the width of the container */
+    max-width: 480px; /* Ensures the button width is consistent */
     padding: 14px;
     font-size: 20px;
-    background-color: #1a73e8; /* Updated blue color */
+    background-color: #1a73e8;
     color: #ffffff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-top: 10px;
+    margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Keep the button fixed at the bottom */
-    bottom: 60px; /* Adjusted to fit above the copyright */
+    position: fixed;
+    bottom: 60px; /* Adjusted to sit further from the bottom and above the copyright */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+}
+
+.nav-btn.lists-page {
+    width: 85%; /* Lists page: slightly narrower than on index page */
+    max-width: 450px; /* Ensures the button width is consistent */
 }
 
 .nav-btn:hover {
@@ -149,8 +154,9 @@ select:focus {
 .list ul {
     list-style-type: none;
     padding: 0;
-    max-height: 60vh;
+    max-height: calc(60vh - 80px); /* Adjusted height to allow for the button */
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .list ul li {
@@ -179,7 +185,7 @@ select:focus {
 }
 
 .phone-icon {
-    color: #1a73e8; /* Updated blue color for consistency */
+    color: #1a73e8;
 }
 
 .whatsapp-icon {
