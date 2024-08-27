@@ -16,7 +16,6 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: "Mukta", sans-serif;
-
 }
 
 h1 {
@@ -28,7 +27,6 @@ h3 {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 22px;
-
 }
 
 h4 {
@@ -51,7 +49,6 @@ select {
     justify-content: space-between;
     margin-bottom: 37px;
     margin-top: 7px;
-
 }
 
 .attendance-btn {
@@ -117,4 +114,22 @@ select {
     background-color: #f1f1f1;
     margin-bottom: 10px;
     border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list ul li .phone-icon, .list ul li .whatsapp-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.phone-icon {
+    color: #007bff; /* Blue color for phone icon */
+}
+
+.whatsapp-icon {
+    color: #25D366; /* WhatsApp's green color */
 }

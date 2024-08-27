@@ -46,6 +46,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to render lists
     function renderLists() {
+        const phoneNumbers = {
+            "עידן בדין": "+972502266557",  // Example phone number for עידן בדין
+            "דודי טוביהו": "+972501234567",  // Add the correct phone number here
+            "מירון בדין": "+972509876543"    // Add the correct phone number here
+        };
+
         if (presentList && absentList) {  // Only if these elements exist
             presentList.innerHTML = "";
             absentList.innerHTML = "";
@@ -53,12 +59,46 @@ document.addEventListener("DOMContentLoaded", function() {
             attendanceData.present.forEach(name => {
                 const li = document.createElement("li");
                 li.textContent = name;
+
+                if (phoneNumbers[name]) {
+                    // Add phone icon
+                    const phoneIcon = document.createElement('a');
+                    phoneIcon.href = `tel:${phoneNumbers[name]}`;
+                    phoneIcon.className = 'phone-icon';
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    li.appendChild(phoneIcon);
+
+                    // Add WhatsApp icon
+                    const whatsappIcon = document.createElement('a');
+                    whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
+                    whatsappIcon.className = 'whatsapp-icon';
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    li.appendChild(whatsappIcon);
+                }
+
                 presentList.appendChild(li);
             });
 
             attendanceData.absent.forEach(name => {
                 const li = document.createElement("li");
                 li.textContent = name;
+
+                if (phoneNumbers[name]) {
+                    // Add phone icon
+                    const phoneIcon = document.createElement('a');
+                    phoneIcon.href = `tel:${phoneNumbers[name]}`;
+                    phoneIcon.className = 'phone-icon';
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    li.appendChild(phoneIcon);
+
+                    // Add WhatsApp icon
+                    const whatsappIcon = document.createElement('a');
+                    whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
+                    whatsappIcon.className = 'whatsapp-icon';
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    li.appendChild(whatsappIcon);
+                }
+
                 absentList.appendChild(li);
             });
 
@@ -81,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
             absentButton.querySelector('span').textContent = `${attendanceData.absent.length}`;
         }
     }
+
 
     // Function to handle button clicks
     function handleAttendance(status) {
