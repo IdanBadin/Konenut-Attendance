@@ -10,18 +10,21 @@ body {
     align-items: center;
     min-height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 .container {
     width: 100%;
     max-width: 480px;
     padding: 30px;
-    padding-bottom: 80px; /* Added more padding to the bottom */
+    padding-bottom: 100px; /* Extra padding for the fixed elements */
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
 h1 {
@@ -102,10 +105,11 @@ select:focus {
 }
 
 .nav-btn {
-    width: 100%;
+    width: 90%; /* Reduced width for a more balanced look */
+    max-width: 400px; /* Added max-width to keep the button proportional */
     padding: 14px;
     font-size: 20px;
-    background-color: #1a73e8;
+    background-color: #1a73e8; /* Updated blue color */
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -113,6 +117,11 @@ select:focus {
     transition: transform 0.3s, box-shadow 0.3s;
     margin-top: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Keep the button fixed at the bottom */
+    bottom: 60px; /* Adjusted to fit above the copyright */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 .nav-btn:hover {
@@ -140,6 +149,8 @@ select:focus {
 .list ul {
     list-style-type: none;
     padding: 0;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 .list ul li {
@@ -168,7 +179,7 @@ select:focus {
 }
 
 .phone-icon {
-    color: #1a73e8;
+    color: #1a73e8; /* Updated blue color for consistency */
 }
 
 .whatsapp-icon {
@@ -216,14 +227,15 @@ select:focus {
 }
 
 .copyright {
-    position: absolute;
-    bottom: 5px; /* Position it lower on the page */
+    position: fixed;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 14px;
     color: #666666;
     text-align: center;
-    white-space: nowrap; /* Ensure the text stays on one line */
+    white-space: nowrap;
+    z-index: 10;
 }
 
 .copyright p {
