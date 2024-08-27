@@ -1,9 +1,9 @@
 /* styles.css */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Mukta", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f7fa;
+    background-color: #f0f4f8;
     text-align: center;
     direction: rtl;
     display: flex;
@@ -14,26 +14,26 @@ body {
 
 .container {
     width: 100%;
-    max-width: 500px;
-    padding: 20px;
+    max-width: 480px;
+    padding: 30px;
     background-color: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 36px;
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 700;
 }
 
 h3 {
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #777777;
+    margin-bottom: 30px;
+    font-size: 20px;
+    color: #666666;
 }
 
 h4 {
@@ -44,30 +44,30 @@ h4 {
 
 select {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     font-size: 18px;
     margin-bottom: 20px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #dddddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #f9fafc;
     color: #333333;
     transition: border-color 0.3s;
 }
 
 select:focus {
-    border-color: #3498db;
+    border-color: #1a73e8;
     outline: none;
 }
 
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .attendance-btn {
     width: 48%;
-    padding: 14px;
+    padding: 15px;
     font-size: 20px;
     color: #ffffff;
     border: none;
@@ -76,50 +76,46 @@ select:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .attendance-btn span {
-    margin-top: 5px;
-    font-size: 20px;
+    margin-top: 8px;
+    font-size: 24px;
     font-weight: bold;
 }
 
 .attendance-btn.green {
-    background-color: #2ecc71;
+    background-color: #28a745;
 }
 
 .attendance-btn.red {
-    background-color: #e74c3c;
+    background-color: #dc3545;
 }
 
 .attendance-btn:hover {
-    background-color: #27ae60;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.attendance-btn.red:hover {
-    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .nav-btn {
     width: 100%;
     padding: 14px;
     font-size: 20px;
-    background-color: #2980b9;
+    background-color: #1a73e8; 
     color: #ffffff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     margin-top: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn:hover {
-    background-color: #1a5276;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .list-container {
@@ -133,7 +129,7 @@ select:focus {
 }
 
 .list h2 {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 15px;
     color: #333333;
     font-weight: 600;
@@ -145,19 +141,20 @@ select:focus {
 }
 
 .list ul li {
-    padding: 12px;
-    background-color: #f4f7fa;
+    padding: 14px;
+    background-color: #f1f3f5;
     margin-bottom: 12px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
+    min-height: 60px;
     box-sizing: border-box;
 }
 
 .list ul li:hover {
-    background-color: #ecf0f1;
+    background-color: #e9ecef;
 }
 
 .list ul li .phone-icon, .list ul li .whatsapp-icon {
@@ -169,7 +166,7 @@ select:focus {
 }
 
 .phone-icon {
-    color: #2980b9;
+    color: #1a73e8;
 }
 
 .whatsapp-icon {
@@ -177,7 +174,54 @@ select:focus {
 }
 
 .phone-icon:hover, .whatsapp-icon:hover {
-    color: #1a5276;
+    color: #0056b3;
+}
+
+/* Hidden list items initially */
+.list-item-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Visible list items after fade-in */
+.list-item-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Fade-in effect for the whole page */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Fade-out effect for navigation */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+}
+
+.copyright p {
+    margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -186,14 +230,14 @@ select:focus {
     }
 
     h1 {
-        font-size: 36px;
+        font-size: 40px;
     }
 
     select, .nav-btn, .attendance-btn {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .attendance-btn span {
-        font-size: 24px;
+        font-size: 28px;
     }
 }

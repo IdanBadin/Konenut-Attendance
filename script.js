@@ -14,6 +14,9 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", function() {
+    // Set the current year in the copyright section
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
     const nameSelect = document.getElementById("nameSelect");
@@ -76,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     li.appendChild(whatsappIcon);
                 }
 
+                li.classList.add('list-item-hidden'); // Add hidden class initially
                 presentList.appendChild(li);
             });
 
@@ -99,8 +103,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     li.appendChild(whatsappIcon);
                 }
 
+                li.classList.add('list-item-hidden'); // Add hidden class initially
                 absentList.appendChild(li);
             });
+
+            // Add scroll-in effect
+            setTimeout(() => {
+                document.querySelectorAll('.list-item-hidden').forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('list-item-visible');
+                        item.classList.remove('list-item-hidden');
+                    }, index * 100); // Delay each item by 100ms for a staggered effect
+                });
+            }, 100); // Slight delay to ensure all items are in the DOM
 
             // Update button counts
             if (presentCount) {
@@ -121,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
             absentButton.querySelector('span').textContent = `${attendanceData.absent.length}`;
         }
     }
-
 
     // Function to handle button clicks
     function handleAttendance(status) {
@@ -174,16 +188,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (toListPage) {
         toListPage.addEventListener("click", () => {
-            window.location.href = "lists.html";
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = "lists.html";
+            }, 500);
         });
     }
 
     if (toSelectionPage) {
         toSelectionPage.addEventListener("click", () => {
-            window.location.href = "index.html";
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 500);
         });
     }
 
     // Initial UI update on page load
     updateUI(); // This ensures that the button counts are updated after a refresh
+    document.body.classList.add('fade-in'); // Fade in the page content on load
 });
