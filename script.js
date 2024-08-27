@@ -14,11 +14,10 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Set the current year in the copyright section
-
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
     const nameSelect = document.getElementById("nameSelect");
+    const nameSearch = document.getElementById("nameSearch");
 
     const presentList = document.getElementById("presentList");
     const absentList = document.getElementById("absentList");
@@ -35,6 +34,23 @@ document.addEventListener("DOMContentLoaded", function() {
         present: [],
         absent: []
     };
+
+    // Only add event listener if nameSearch exists (i.e., on the index page)
+    if (nameSearch) {
+        nameSearch.addEventListener('input', function() {
+            const filter = nameSearch.value.toLowerCase();
+            const options = nameSelect.options;
+
+            for (let i = 1; i < options.length; i++) {
+                const txtValue = options[i].textContent || options[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+        });
+    }
 
     // Function to update UI with Firestore data
     function updateUI() {
@@ -54,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             "מירון בדין": "+972509876543"    // Add the correct phone number here
         };
 
-        if (presentList && absentList) {  // Only if these elements exist
+        if (presentList && absentList) {
             presentList.innerHTML = "";
             absentList.innerHTML = "";
 
@@ -63,22 +79,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 li.textContent = name;
 
                 if (phoneNumbers[name]) {
-                    // Add phone icon
                     const phoneIcon = document.createElement('a');
                     phoneIcon.href = `tel:${phoneNumbers[name]}`;
                     phoneIcon.className = 'phone-icon';
-                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>';
                     li.appendChild(phoneIcon);
 
-                    // Add WhatsApp icon
                     const whatsappIcon = document.createElement('a');
                     whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
                     whatsappIcon.className = 'whatsapp-icon';
-                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>';
                     li.appendChild(whatsappIcon);
                 }
 
-                li.classList.add('list-item-hidden'); // Add hidden class initially
+                li.classList.add('list-item-hidden');
                 presentList.appendChild(li);
             });
 
@@ -87,36 +101,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 li.textContent = name;
 
                 if (phoneNumbers[name]) {
-                    // Add phone icon
                     const phoneIcon = document.createElement('a');
                     phoneIcon.href = `tel:${phoneNumbers[name]}`;
                     phoneIcon.className = 'phone-icon';
-                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>';
                     li.appendChild(phoneIcon);
 
-                    // Add WhatsApp icon
                     const whatsappIcon = document.createElement('a');
                     whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
                     whatsappIcon.className = 'whatsapp-icon';
-                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>';
                     li.appendChild(whatsappIcon);
                 }
 
-                li.classList.add('list-item-hidden'); // Add hidden class initially
+                li.classList.add('list-item-hidden');
                 absentList.appendChild(li);
             });
 
-            // Add scroll-in effect
             setTimeout(() => {
                 document.querySelectorAll('.list-item-hidden').forEach((item, index) => {
                     setTimeout(() => {
                         item.classList.add('list-item-visible');
                         item.classList.remove('list-item-hidden');
-                    }, index * 100); // Delay each item by 100ms for a staggered effect
+                    }, index * 100);
                 });
-            }, 100); // Slight delay to ensure all items are in the DOM
+            }, 100);
 
-            // Update button counts
             if (presentCount) {
                 presentCount.textContent = `${attendanceData.present.length}`;
             }
@@ -126,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        // Also update the button counts if presentCount or absentCount exist
         if (presentButton) {
             presentButton.querySelector('span').textContent = `${attendanceData.present.length}`;
         }
@@ -136,47 +145,49 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Function to handle button clicks
     function handleAttendance(status) {
-        const selectedName = nameSelect.value;
+        const selectedName = nameSelect ? nameSelect.value : null;
         if (!selectedName) {
             alert("אנא בחר שם");
             return;
         }
 
-        // First, fetch the latest data to ensure we're working with up-to-date lists
         attendanceRef.doc("current").get().then((doc) => {
             if (doc.exists) {
                 attendanceData = doc.data();
             }
 
-            // Remove name from both lists to prevent duplicates
             attendanceData.present = attendanceData.present.filter(name => name !== selectedName);
             attendanceData.absent = attendanceData.absent.filter(name => name !== selectedName);
 
-            // Add name to the correct list
             if (status === "present") {
                 attendanceData.present.push(selectedName);
             } else {
                 attendanceData.absent.push(selectedName);
             }
 
-            // Save updated lists back to Firestore
             attendanceRef.doc("current").set(attendanceData).then(() => {
                 updateUI();
-                resetNameSelect(); // Reset the name selection after updating the lists
+                resetNameSelect();
             });
         }).catch((error) => {
             console.error("Error getting document:", error);
         });
     }
 
-    // Function to reset the name select dropdown
     function resetNameSelect() {
-        nameSelect.value = ""; // Reset the dropdown to its default state
+        if (nameSelect) {
+            nameSelect.value = "";
+        }
+        if (nameSearch) {
+            nameSearch.value = "";
+        }
+        const options = nameSelect ? nameSelect.options : [];
+        for (let i = 1; i < options.length; i++) {
+            options[i].style.display = "";
+        }
     }
 
-    // Add event listeners only if the elements exist
     if (presentButton) {
         presentButton.addEventListener("click", () => handleAttendance("present"));
     }
@@ -203,7 +214,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Initial UI update on page load
-    updateUI(); // This ensures that the button counts are updated after a refresh
-    document.body.classList.add('fade-in'); // Fade in the page content on load
+    updateUI();
+    document.body.classList.add('fade-in');
 });
