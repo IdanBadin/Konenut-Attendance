@@ -96,7 +96,7 @@ select:focus {
 }
 
 .attendance-btn.red {
-    background-color: #dc3545;
+    background-color: black;
 }
 
 .attendance-btn:hover {
