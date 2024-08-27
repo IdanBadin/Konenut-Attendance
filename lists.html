@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div id="listsContainer" class="container">
         <h1>רשימת נוכחות</h1>
         <div class="list-container">
             <div class="list">
@@ -25,12 +25,9 @@
             </div>
         </div>
 
-        <button id="toSelectionPage" class="nav-btn">לעידכון נוכחות</button>
-
-        <div class="copyright">
-            <p>.Copyright © <span id="currentYear"></span> Idan Badin. All rights reserved</p>
-        </div>
+        <button id="toSelectionPage" class="nav-btn lists-page">לעידכון נוכחות</button>
     </div>
+    
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>

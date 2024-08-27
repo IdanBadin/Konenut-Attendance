@@ -17,7 +17,6 @@ body {
     width: 100%;
     max-width: 480px;
     padding: 30px;
-    padding-bottom: 100px; /* Ensure there's enough space for the button */
     margin: 0 15px; /* Added margin to create space on the left and right sides */
     background-color: #ffffff;
     border-radius: 16px;
@@ -27,6 +26,11 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+#listsContainer {
+    padding-bottom: 65px; /* Space for button */
+    max-height: calc(100vh - 20px); /* Ensures the container leaves space at the bottom of the screen */
 }
 
 h1 {
@@ -120,16 +124,10 @@ select:focus {
     margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
-    bottom: 60px; /* Adjusted to sit further from the bottom and above the copyright */
+    bottom: 60px; /* Keep this as the default for the index page */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
-}
-
-.nav-btn.lists-page {
-    width: 85%; /* Lists page: slightly narrower than on index page */
-    max-width: 450px; /* Ensures the button width is consistent */
-    margin-top: auto; /* Push the button to the bottom of the container */
 }
 
 .nav-btn:hover {
@@ -137,13 +135,33 @@ select:focus {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Specific styles for the lists page */
+.nav-btn.lists-page {
+    width: 85%; /* Lists page: slightly narrower than on index page */
+    max-width: 450px; /* Ensures the button width is consistent */
+    padding: 14px;
+    font-size: 20px;
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Push the button to the bottom of the container */
+    position: absolute; /* Position inside the container */
+    bottom: 20px; /* Position at the bottom of the container */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
 .list-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     flex: 1; /* Ensure the list container takes up available space */
     overflow-y: auto; /* Enable scrolling within the container */
-    padding-bottom: 80px; /* Extra padding to ensure the list ends above the button */
 }
 
 .list {
@@ -160,10 +178,10 @@ select:focus {
 .list ul {
     list-style-type: none;
     padding: 0;
-    max-height: calc(60vh - 80px); /* Adjusted height to allow for the button */
     overflow-y: auto;
     overflow-x: hidden; /* Prevent horizontal scrolling */
     margin-bottom: 0; /* Remove any margin that could cause overflow */
+    max-height: calc(100vh - 280px); /* Ensures scrolling and visibility of last item */
 }
 
 .list ul li {

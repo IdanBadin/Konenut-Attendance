@@ -15,7 +15,6 @@ const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", function() {
     // Set the current year in the copyright section
-    document.getElementById("currentYear").textContent = new Date().getFullYear();
 
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
