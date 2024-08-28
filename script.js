@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
     const nameSelect = document.getElementById("nameSelect");
+    const popupMessage = document.getElementById("popupMessage");
+    const closePopupButton = document.getElementById("closePopupButton");
 
     const presentList = document.getElementById("presentList");
     const absentList = document.getElementById("absentList");
@@ -196,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
             attendanceRef.doc("current").set(attendanceData).then(() => {
                 updateUI();
                 resetNameSelect(); // Reset the name selection after updating the lists
+                showPopup(); // Show the pop-up message
             });
         }).catch((error) => {
             console.error("Error getting document:", error);
@@ -209,6 +212,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Function to show the pop-up message
+    function showPopup() {
+        popupMessage.style.display = "block";
+    }
+
+    // Function to hide the pop-up message
+    function hidePopup() {
+        popupMessage.style.display = "none";
+    }
+
     // Add event listeners only if the elements exist
     if (presentButton) {
         presentButton.addEventListener("click", () => handleAttendance("present"));
@@ -216,6 +229,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (absentButton) {
         absentButton.addEventListener("click", () => handleAttendance("absent"));
+    }
+
+    if (closePopupButton) {
+        closePopupButton.addEventListener("click", hidePopup);
     }
 
     if (toListPage) {

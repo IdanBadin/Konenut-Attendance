@@ -300,3 +300,38 @@ select:focus {
         font-size: 28px;
     }
 }
+
+.popup-message {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    text-align: center;
+}
+
+.popup-message p {
+    margin: 0;
+    font-size: 20px;
+    color: #28a745; /* Success message color */
+}
+
+.close-popup-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-popup-btn:hover {
+    background-color: #0056b3;
+}
