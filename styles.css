@@ -76,6 +76,11 @@ h4 {
     outline: none;
 }
 
+.dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
 #nameSelect {
     width: 100%;
     padding: 10px;
@@ -85,6 +90,18 @@ h4 {
     background-color: #f9fafc;
     color: #333333;
     box-sizing: border-box;
+    appearance: none; /* Remove default select styling */
+    -webkit-appearance: none; /* Remove iOS default styling */
+}
+
+#nameSelect option {
+    padding: 10px;
+    background-color: #fff;
+}
+
+#nameSelect:focus {
+    border-color: #1a73e8;
+    outline: none;
 }
 
 .button-container {
@@ -119,7 +136,7 @@ h4 {
 }
 
 .attendance-btn.red {
-    background-color: #dc3545;
+    background-color: black;
 }
 
 .attendance-btn:hover {

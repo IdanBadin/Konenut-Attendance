@@ -18,20 +18,16 @@
 
         <!-- Searchable dropdown container -->
         <div class="searchable-dropdown">
-            <input type="text" id="nameSearch" placeholder="חפש שם..." />
-            <select id="nameSelect" size="5">
-                <option value="" disabled selected>בחר שם</option>
-                <option value="עידן בדין">עידן בדין</option>
-                <option value="דודי טוביהו">דודי טוביהו</option>
-                <option value="מירון בדין">מירון בדין</option>
-                <option value="עידן כעי">עידן כעיכיעכי</option>
-                <option value="דודי טובדגרקיהו">דודי טוביהאטרקו</option>
-                <option value="מירון במחוודין">מירון בדמוינעהין</option>
-                <option value="עידן בדלחיעכגדכעין">עידן בדיעכגדגכעין</option>
-                <option value="דודי טוביוטארקדגבהנהו">דודי טוביהחצמנהכאיו</option>
-                <option value="מירון ביטאכעדין">מירון בדאטיעאעין</option>
-                <!-- Add more options as needed -->
-            </select>
+            <input type="text" id="nameSearch" placeholder="חפש שם..." onfocus="this.value=''" />
+            <div class="dropdown-container">
+                <select id="nameSelect" size="5" onclick="this.size=5" onblur="this.size=1" onchange="this.size=1; this.blur();">
+                    <option value="" disabled selected>בחר שם</option>
+                    <option value="עידן בדין">עידן בדין</option>
+                    <option value="דודי טוביהו">דודי טוביהו</option>
+                    <option value="מירון בדין">מירון בדין</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
         </div>
 
         <div>
