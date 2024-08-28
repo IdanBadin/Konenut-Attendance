@@ -55,8 +55,8 @@ h4 {
 
 select {
     width: 100%;
-    padding: 14px;
-    font-size: 18px;
+    padding: 18px; /* Increased padding */
+    font-size: 22px; /* Increased font size */
     margin-bottom: 20px;
     border: 1px solid #dddddd;
     border-radius: 8px;

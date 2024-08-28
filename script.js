@@ -15,6 +15,7 @@ const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", function() {
     // Set the current year in the copyright section
+    const currentYear = new Date().getFullYear();
 
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
@@ -36,6 +37,17 @@ document.addEventListener("DOMContentLoaded", function() {
         absent: []
     };
 
+    // Initialize Select2 for the dropdown with a custom search placeholder
+    $(document).ready(function() {
+        $('#nameSelect').select2({
+            placeholder: "בחר שם", // Placeholder text for the dropdown itself
+            allowClear: true, // Allows users to clear the selection
+            language: {
+                inputTooShort: function () { return "חפש שם"; } // Custom message when searching
+            }
+        });
+    });
+
     // Function to update UI with Firestore data
     function updateUI() {
         attendanceRef.doc("current").get().then((doc) => {
@@ -49,9 +61,28 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to render lists
     function renderLists() {
         const phoneNumbers = {
-            "עידן בדין": "+972502266557",  // Example phone number for עידן בדין
-            "דודי טוביהו": "+972501234567",  // Add the correct phone number here
-            "מירון בדין": "+972509876543"    // Add the correct phone number here
+            "עידן בדין": "+972502266557",
+            "דודי טוביהו": "+972536062619",
+            "ערן אבנון": "+972507515080",
+            "איתן להב": "+972529615639",
+            "נבות מרזל": "+972584777433",
+            "ערן אבידור": "+972546682820",
+            "אילן כץ": "+972547887007",
+            "דני להב": "+972522741519",
+            "יובל קרנר": "+972528893904",
+            "משה שרביט": "+972542288890",
+            "אלי דפס": "+972545870644",
+            "עמוס קורן": "+972505238282",
+            "אמיר אבידור": "+972544643345",
+            "גל פאר": "+972544866402",
+            "אלון מאור": "+972506247983",
+            "ארז עצמון": "+972508673329",
+            "יניב גולן": "+972544548249",
+            "משה ברזלי": "+972543166691",
+            "ורד ליברנט": "+972544889987",
+            "חיים ליברנט": "+972505311085",
+            "בועז פאר": "+972508234090",
+            "ניב רוטברג": "+972522211175"
         };
 
         if (presentList && absentList) {  // Only if these elements exist
