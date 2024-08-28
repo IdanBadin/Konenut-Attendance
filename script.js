@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to reset the name select dropdown
     function resetNameSelect() {
         if (nameSelect) {
-            nameSelect.value = ""; // Reset the dropdown to its default state
+            $('#nameSelect').val(null).trigger('change'); // Reset the dropdown to its default state
         }
     }
 

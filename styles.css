@@ -201,8 +201,18 @@ select:focus {
     background-color: #e9ecef;
 }
 
+.list ul li .name {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.list ul li .icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Adds space between the icons */
+}
+
 .list ul li .phone-icon, .list ul li .whatsapp-icon {
-    margin-left: 10px;
     cursor: pointer;
     text-decoration: none;
     font-size: 22px;
