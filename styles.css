@@ -31,7 +31,6 @@ body {
 #listsContainer {
     padding-bottom: 65px; /* Space for button */
     max-height: calc(100vh - 20px); /* Ensures the container leaves space at the bottom of the screen */
-    min-height: 600px;
 }
 
 h1 {
@@ -54,37 +53,21 @@ h4 {
     margin-top: 5px;
 }
 
-/* Styling for the searchable dropdown */
-.searchable-dropdown {
-    position: relative;
-}
-
-#nameSearch {
+select {
     width: 100%;
-    padding: 10px;
+    padding: 14px;
     font-size: 18px;
-    border-radius: 8px;
+    margin-bottom: 20px;
     border: 1px solid #dddddd;
-    margin-bottom: 10px;
+    border-radius: 8px;
     background-color: #f9fafc;
     color: #333333;
-    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
-#nameSearch:focus {
+select:focus {
     border-color: #1a73e8;
     outline: none;
-}
-
-#nameSelect {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 8px;
-    border: 1px solid #dddddd;
-    background-color: #f9fafc;
-    color: #333333;
-    box-sizing: border-box;
 }
 
 .button-container {
