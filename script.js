@@ -14,8 +14,6 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Set the current year in the copyright section
-    const currentYear = new Date().getFullYear();
 
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
@@ -37,16 +35,18 @@ document.addEventListener("DOMContentLoaded", function() {
         absent: []
     };
 
-    // Initialize Select2 for the dropdown with a custom search placeholder
-    $(document).ready(function() {
-        $('#nameSelect').select2({
-            placeholder: "בחר שם", // Placeholder text for the dropdown itself
-            allowClear: true, // Allows users to clear the selection
-            language: {
-                inputTooShort: function () { return "חפש שם"; } // Custom message when searching
-            }
+    // Initialize Select2 only if the select element is present
+    if (nameSelect) {
+        $(document).ready(function() {
+            $('#nameSelect').select2({
+                placeholder: "בחר שם", // Placeholder text for the dropdown itself
+                allowClear: true, // Allows users to clear the selection
+                language: {
+                    inputTooShort: function () { return "חפש שם"; } // Custom message when searching
+                }
+            });
         });
-    });
+    }
 
     // Function to update UI with Firestore data
     function updateUI() {
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to handle button clicks
     function handleAttendance(status) {
-        const selectedName = nameSelect.value;
+        const selectedName = nameSelect ? nameSelect.value : null;
         if (!selectedName) {
             alert("אנא בחר שם");
             return;
@@ -204,7 +204,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to reset the name select dropdown
     function resetNameSelect() {
-        nameSelect.value = ""; // Reset the dropdown to its default state
+        if (nameSelect) {
+            nameSelect.value = ""; // Reset the dropdown to its default state
+        }
     }
 
     // Add event listeners only if the elements exist
