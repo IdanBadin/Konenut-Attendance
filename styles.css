@@ -1,5 +1,8 @@
+/* Import the Rubik font for Hebrew text */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+
 body {
-    font-family: "Mukta", sans-serif;
+    font-family: "Rubik", sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f4f8;
@@ -13,6 +16,7 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+/* Container styling */
 .container {
     width: 100%;
     max-width: 480px;
@@ -28,16 +32,19 @@ body {
     flex-direction: column;
 }
 
+/* Lists container for the lists page */
 #listsContainer {
     padding-bottom: 65px; /* Space for button */
     max-height: calc(100vh - 20px); /* Ensures the container leaves space at the bottom of the screen */
 }
 
+/* Headings */
 h1 {
     font-size: 36px;
     color: #333333;
     margin-bottom: 10px;
     font-weight: 700;
+    letter-spacing: -0.3px;
 }
 
 h3 {
@@ -45,18 +52,21 @@ h3 {
     margin-bottom: 30px;
     font-size: 20px;
     color: #666666;
+    font-weight: 400;
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 16px;
     color: #999999;
     margin-top: 5px;
+    font-weight: 400;
 }
 
+/* Select dropdown styling */
 select {
     width: 100%;
-    padding: 18px; /* Increased padding */
-    font-size: 22px; /* Increased font size */
+    padding: 20px;
+    font-size: 24px;
     margin-bottom: 20px;
     border: 1px solid #dddddd;
     border-radius: 8px;
@@ -70,16 +80,48 @@ select:focus {
     outline: none;
 }
 
+/* Adjusted size for the Select2 container */
+.select2-container--default .select2-selection--single {
+    height: 50px;
+    padding: 8px;
+    font-size: 20px;
+    line-height: 34px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 34px; /* Vertical alignment */
+}
+
+.select2-container .select2-selection--single .select2-selection__arrow {
+    height: 50px; /* Arrow height */
+}
+
+.select2-container .select2-dropdown .select2-search--dropdown .select2-search__field {
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+
+.select2-container .select2-dropdown {
+    font-size: 20px; /* Match font size of options */
+}
+
+/* Button container styling */
 .button-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+    flex-grow: 1; /* Ensures the container grows to fill the available space */
 }
 
+/* Attendance buttons */
 .attendance-btn {
     width: 48%;
-    padding: 15px;
-    font-size: 20px;
+    padding: 20px; /* Increased padding for height */
+    font-size: 20px; /* Increased font size */
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -87,32 +129,42 @@ select:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centers the text vertically */
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    height: 100%; /* Makes the button fill the container height */
 }
 
-.attendance-btn span {
-    margin-top: 8px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
+/* Green button */
 .attendance-btn.green {
-    background-color: #28a745;
+    background-color: #28a745; /* Green color */
 }
 
+/* Red button */
 .attendance-btn.red {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Red color */
 }
 
+/* Hover effects for attendance buttons */
 .attendance-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Attendance button text styling */
+.attendance-btn span {
+    margin-top: 8px;
+    font-size: 24px; /* Increased font size */
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+/* Navigation button styling */
 .nav-btn {
-    width: 90%; /* Index page: matches the width of the container */
-    max-width: 480px; /* Ensures the button width is consistent */
+    width: 90%;
+    max-width: 480px;
     padding: 14px;
     font-size: 20px;
     background-color: #1a73e8;
@@ -124,21 +176,22 @@ select:focus {
     margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
-    bottom: 60px; /* Keep this as the default for the index page */
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
 }
 
+/* Hover effects for navigation button */
 .nav-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Specific styles for the lists page */
+/* Navigation button styles specific to the lists page */
 .nav-btn.lists-page {
-    width: 85%; /* Lists page: slightly narrower than on index page */
-    max-width: 450px; /* Ensures the button width is consistent */
+    width: 85%;
+    max-width: 450px;
     padding: 14px;
     font-size: 20px;
     background-color: #1a73e8;
@@ -148,22 +201,24 @@ select:focus {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: auto; /* Push the button to the bottom of the container */
-    position: absolute; /* Position inside the container */
-    bottom: 20px; /* Position at the bottom of the container */
+    margin-top: auto;
+    position: absolute;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
 }
 
+/* List container styling */
 .list-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    flex: 1; /* Ensure the list container takes up available space */
-    overflow-y: auto; /* Enable scrolling within the container */
+    flex: 1;
+    overflow-y: auto;
 }
 
+/* List styling */
 .list {
     width: 48%;
 }
@@ -179,9 +234,9 @@ select:focus {
     list-style-type: none;
     padding: 0;
     overflow-y: auto;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    margin-bottom: 0; /* Remove any margin that could cause overflow */
-    max-height: calc(100vh - 280px); /* Ensures scrolling and visibility of last item */
+    overflow-x: hidden;
+    margin-bottom: 0;
+    max-height: calc(100vh - 280px);
 }
 
 .list ul li {
@@ -201,17 +256,20 @@ select:focus {
     background-color: #e9ecef;
 }
 
+/* Name styling within list items */
 .list ul li .name {
     flex-grow: 1;
     text-align: right;
 }
 
+/* Icons container within list items */
 .list ul li .icons {
     display: flex;
     justify-content: flex-end;
-    gap: 10px; /* Adds space between the icons */
+    gap: 10px;
 }
 
+/* Phone and WhatsApp icons */
 .list ul li .phone-icon, .list ul li .whatsapp-icon {
     cursor: pointer;
     text-decoration: none;
@@ -267,6 +325,7 @@ select:focus {
     }
 }
 
+/* Copyright styling */
 .copyright {
     position: fixed;
     bottom: 10px;
@@ -283,26 +342,9 @@ select:focus {
     margin: 0;
 }
 
-@media (min-width: 768px) {
-    .container {
-        max-width: 600px;
-    }
-
-    h1 {
-        font-size: 40px;
-    }
-
-    select, .nav-btn, .attendance-btn {
-        font-size: 24px;
-    }
-
-    .attendance-btn span {
-        font-size: 28px;
-    }
-}
-
+/* Popup message styling */
 .popup-message {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -334,4 +376,23 @@ select:focus {
 
 .close-popup-btn:hover {
     background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .container {
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    select, .nav-btn, .attendance-btn {
+        font-size: 24px;
+    }
+
+    .attendance-btn span {
+        font-size: 28px;
+    }
 }

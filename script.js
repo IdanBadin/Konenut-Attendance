@@ -44,8 +44,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 placeholder: "בחר שם", // Placeholder text for the dropdown itself
                 allowClear: true, // Allows users to clear the selection
                 language: {
-                    inputTooShort: function () { return "חפש שם"; } // Custom message when searching
-                }
+                    inputTooShort: function () { return "חפש שם"; }, // Custom message when searching
+                    noResults: function () { return "אין תוצאות"; } // Message for no results
+                },
+                dropdownCssClass: 'big-dropdown', // Added CSS class to style the dropdown
+                searchInputPlaceholder: 'חפש שם' // Add placeholder text for the search input
             });
         });
     }
@@ -63,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to render lists
     function renderLists() {
         const phoneNumbers = {
-            "עידן בדין": "+972502266557",
             "דודי טוביהו": "+972536062619",
             "ערן אבנון": "+972507515080",
             "איתן להב": "+972529615639",
