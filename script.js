@@ -12,9 +12,23 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const messaging = firebase.messaging();
 
-document.addEventListener("DOMContentLoaded", function() {
+// Register the service worker for Firebase Messaging
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+        .then(function (registration) {
+            console.log('Service Worker registered with scope:', registration.scope);
+            messaging.useServiceWorker(registration);  // Attach the service worker to Firebase messaging
+        })
+        .catch(function (error) {
+            console.error('Service Worker registration failed:', error);
+        });
+} else {
+    console.error('Service Worker is not supported in this browser.');
+}
 
+document.addEventListener("DOMContentLoaded", function () {
     const presentButton = document.getElementById("presentButton");
     const absentButton = document.getElementById("absentButton");
     const nameSelect = document.getElementById("nameSelect");
@@ -30,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const toListPage = document.getElementById("toListPage");
     const toSelectionPage = document.getElementById("toSelectionPage");
 
+    const sosButton = document.getElementById("sosButton");
+
     const attendanceRef = db.collection("attendance");
 
     let attendanceData = {
@@ -39,21 +55,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Initialize Select2 only if the select element is present
     if (nameSelect) {
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#nameSelect').select2({
-                placeholder: "בחר שם", // Placeholder text for the dropdown itself
-                allowClear: true, // Allows users to clear the selection
+                placeholder: "בחר שם",
+                allowClear: true,
                 language: {
-                    inputTooShort: function () { return "חפש שם"; }, // Custom message when searching
-                    noResults: function () { return "אין תוצאות"; } // Message for no results
+                    inputTooShort: function () { return "חפש שם"; },
+                    noResults: function () { return "אין תוצאות"; }
                 },
-                dropdownCssClass: 'big-dropdown', // Added CSS class to style the dropdown
-                searchInputPlaceholder: 'חפש שם' // Add placeholder text for the search input
+                dropdownCssClass: 'big-dropdown',
+                searchInputPlaceholder: 'חפש שם'
             });
         });
     }
 
-    // Function to update UI with Firestore data
     function updateUI() {
         attendanceRef.doc("current").get().then((doc) => {
             if (doc.exists) {
@@ -63,33 +78,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Function to render lists
     function renderLists() {
         const phoneNumbers = {
+            // Example phone numbers mapped to names
             "דודי טוביהו": "+972536062619",
-            "ערן אבנון": "+972507515080",
-            "איתן להב": "+972529615639",
-            "נבות מרזל": "+972584777433",
-            "ערן אבידור": "+972546682820",
-            "אילן כץ": "+972547887007",
-            "דני להב": "+972522741519",
-            "יובל קרנר": "+972528893904",
-            "משה שרביט": "+972542288890",
-            "אלי דפס": "+972545870644",
-            "עמוס קורן": "+972505238282",
-            "אמיר אבידור": "+972544643345",
-            "גל פאר": "+972544866402",
-            "אלון מאור": "+972506247983",
-            "ארז עצמון": "+972508673329",
-            "יניב גולן": "+972544548249",
-            "משה ברזלי": "+972543166691",
-            "ורד ליברנט": "+972544889987",
-            "חיים ליברנט": "+972505311085",
-            "בועז פאר": "+972508234090",
-            "ניב רוטברג": "+972522211175"
+            // (Other numbers here)
         };
 
-        if (presentList && absentList) {  // Only if these elements exist
+        if (presentList && absentList) {
             presentList.innerHTML = "";
             absentList.innerHTML = "";
 
@@ -98,22 +94,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 li.textContent = name;
 
                 if (phoneNumbers[name]) {
-                    // Add phone icon
                     const phoneIcon = document.createElement('a');
                     phoneIcon.href = `tel:${phoneNumbers[name]}`;
                     phoneIcon.className = 'phone-icon';
-                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>';
                     li.appendChild(phoneIcon);
 
-                    // Add WhatsApp icon
                     const whatsappIcon = document.createElement('a');
                     whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
                     whatsappIcon.className = 'whatsapp-icon';
-                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>';
                     li.appendChild(whatsappIcon);
                 }
 
-                li.classList.add('list-item-hidden'); // Add hidden class initially
+                li.classList.add('list-item-hidden');
                 presentList.appendChild(li);
             });
 
@@ -122,36 +116,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 li.textContent = name;
 
                 if (phoneNumbers[name]) {
-                    // Add phone icon
                     const phoneIcon = document.createElement('a');
                     phoneIcon.href = `tel:${phoneNumbers[name]}`;
                     phoneIcon.className = 'phone-icon';
-                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>'; // Font Awesome phone icon
+                    phoneIcon.innerHTML = '<i class="fas fa-phone"></i>';
                     li.appendChild(phoneIcon);
 
-                    // Add WhatsApp icon
                     const whatsappIcon = document.createElement('a');
                     whatsappIcon.href = `https://wa.me/${phoneNumbers[name].replace('+', '')}`;
                     whatsappIcon.className = 'whatsapp-icon';
-                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>'; // Font Awesome WhatsApp icon
+                    whatsappIcon.innerHTML = '<i class="fab fa-whatsapp"></i>';
                     li.appendChild(whatsappIcon);
                 }
 
-                li.classList.add('list-item-hidden'); // Add hidden class initially
+                li.classList.add('list-item-hidden');
                 absentList.appendChild(li);
             });
 
-            // Add scroll-in effect
             setTimeout(() => {
                 document.querySelectorAll('.list-item-hidden').forEach((item, index) => {
                     setTimeout(() => {
                         item.classList.add('list-item-visible');
                         item.classList.remove('list-item-hidden');
-                    }, index * 100); // Delay each item by 100ms for a staggered effect
+                    }, index * 100);
                 });
-            }, 100); // Slight delay to ensure all items are in the DOM
+            }, 100);
 
-            // Update button counts
             if (presentCount) {
                 presentCount.textContent = `${attendanceData.present.length}`;
             }
@@ -160,18 +150,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 absentCount.textContent = `${attendanceData.absent.length}`;
             }
         }
-
-        // Also update the button counts if presentCount or absentCount exist
-        if (presentButton) {
-            presentButton.querySelector('span').textContent = `${attendanceData.present.length}`;
-        }
-
-        if (absentButton) {
-            absentButton.querySelector('span').textContent = `${attendanceData.absent.length}`;
-        }
     }
 
-    // Function to handle button clicks
     function handleAttendance(status) {
         const selectedName = nameSelect ? nameSelect.value : null;
         if (!selectedName) {
@@ -179,52 +159,44 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // First, fetch the latest data to ensure we're working with up-to-date lists
         attendanceRef.doc("current").get().then((doc) => {
             if (doc.exists) {
                 attendanceData = doc.data();
             }
 
-            // Remove name from both lists to prevent duplicates
             attendanceData.present = attendanceData.present.filter(name => name !== selectedName);
             attendanceData.absent = attendanceData.absent.filter(name => name !== selectedName);
 
-            // Add name to the correct list
             if (status === "present") {
                 attendanceData.present.push(selectedName);
             } else {
                 attendanceData.absent.push(selectedName);
             }
 
-            // Save updated lists back to Firestore
             attendanceRef.doc("current").set(attendanceData).then(() => {
                 updateUI();
-                resetNameSelect(); // Reset the name selection after updating the lists
-                showPopup(); // Show the pop-up message
+                resetNameSelect();
+                showPopup();
             });
         }).catch((error) => {
             console.error("Error getting document:", error);
         });
     }
 
-    // Function to reset the name select dropdown
     function resetNameSelect() {
         if (nameSelect) {
-            $('#nameSelect').val(null).trigger('change'); // Reset the dropdown to its default state
+            $('#nameSelect').val(null).trigger('change');
         }
     }
 
-    // Function to show the pop-up message
     function showPopup() {
         popupMessage.style.display = "block";
     }
 
-    // Function to hide the pop-up message
     function hidePopup() {
         popupMessage.style.display = "none";
     }
 
-    // Add event listeners only if the elements exist
     if (presentButton) {
         presentButton.addEventListener("click", () => handleAttendance("present"));
     }
@@ -255,7 +227,80 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Initial UI update on page load
-    updateUI(); // This ensures that the button counts are updated after a refresh
-    document.body.classList.add('fade-in'); // Fade in the page content on load
+    if (sosButton) {
+        sosButton.addEventListener("click", sendSOSNotification);
+    }
+
+    updateUI();
+    document.body.classList.add('fade-in');
+
+    requestNotificationPermission();
 });
+
+function requestNotificationPermission() {
+    messaging.requestPermission()
+        .then(() => {
+            console.log('Notification permission granted.');
+            return messaging.getToken();
+        })
+        .then(token => {
+            console.log('Token received:', token);
+            storeToken(token);
+        })
+        .catch(error => {
+            if (error.code === 'messaging/permission-blocked') {
+                console.error('Permission blocked. Please enable notifications in your browser settings.');
+                alert('Notification permission was blocked. Please enable notifications in your browser settings.');
+            } else {
+                console.error('Unable to get permission to notify:', error);
+            }
+        });
+}
+
+function storeToken(token) {
+    const userID = 'test_user';
+    db.collection('userTokens').doc(userID).set({
+        token: token
+    })
+    .then(() => {
+        console.log('Token successfully stored in Firestore.');
+    })
+    .catch(error => {
+        console.error('Error storing token in Firestore:', error);
+    });
+}
+
+function sendSOSNotification() {
+    console.log('Attempting to send SOS notification');
+
+    const userID = 'test_user';
+    db.collection('userTokens').doc(userID).get().then((doc) => {
+        if (doc.exists) {
+            const token = doc.data().token;
+            console.log('Token retrieved:', token);
+            fetch('http://localhost:3000/send-sos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    tokens: [token]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('SOS notification sent successfully.');
+                } else {
+                    console.error('Failed to send SOS notification.');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending SOS notification:', error);
+            });
+        } else {
+            console.error('No token found for user.');
+        }
+    }).catch((error) => {
+        console.error('Error retrieving token from Firestore:', error);
+    });
+}

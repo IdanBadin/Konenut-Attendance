@@ -396,3 +396,15 @@ select:focus {
         font-size: 28px;
     }
 }
+
+/* SOS Button */
+.attendance-btn.sos-btn {
+    background-color: #ff4d4d; /* Red color to indicate emergency */
+    color: #fff;
+    font-size: 22px;
+}
+
+.attendance-btn.sos-btn:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
